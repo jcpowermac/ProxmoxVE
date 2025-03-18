@@ -8,7 +8,7 @@ source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxV
 APP="Open WebUI"
 var_tags="${var_tags:-ai;interface}"
 var_cpu="${var_cpu:-4}"
-var_ram="${var_ram:-4096}"
+var_ram="${var_ram:-8192}"
 var_disk="${var_disk:-16}"
 var_os="${var_os:-debian}"
 var_version="${var_version:-12}"
@@ -56,7 +56,7 @@ function update_script() {
   fi
   systemctl stop open-webui.service
   $STD npm install
-  export NODE_OPTIONS="--max-old-space-size=3584"
+  export NODE_OPTIONS="--max-old-space-size=6144"
   $STD npm run build
   cd ./backend
   $STD pip install -r requirements.txt -U
